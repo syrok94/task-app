@@ -49,6 +49,11 @@
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
+.menu-items{
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: 768px) {
     
     .menu-btn {

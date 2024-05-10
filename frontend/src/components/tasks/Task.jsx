@@ -27,7 +27,7 @@ const Task = () => {
 
   useEffect(() => {
     fetchData();
-  }, [tasks]);
+  }, []);
 
   const handleDelete = async (task) => {
     const DELETE_API = `${API_ENDPOINT}/${task._id}`;

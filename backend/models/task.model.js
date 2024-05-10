@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./user.model");
 
 const TaskSchema = new mongoose.Schema(
   {
@@ -9,7 +10,7 @@ const TaskSchema = new mongoose.Schema(
     desc: {
       type: String,
       required: true,
-    },
+    }
   },
   {
     timestamps: true,

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import "../form/Form.css";
 import { API_ENDPOINT } from "../../constants/endpoint";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Form = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const token = localStorage.getItem("token");
@@ -35,7 +35,7 @@ const Form = () => {
     setName("");
     setDesc("");
 
-    navigate("/");
+    window.location.reload();
   };
 
   return (
