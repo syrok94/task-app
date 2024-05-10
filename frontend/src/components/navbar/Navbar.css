@@ -1,0 +1,83 @@
+.nav-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-name {
+    margin: 15px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.btn {
+    padding: 10px;
+    margin: 15px;
+    color: black;
+    border-radius: 5px;
+    background-color: white;
+    border: 2px solid rgb(159, 174, 255);
+}
+
+
+.line {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+.menu-btn {
+    display: none; 
+    cursor: pointer;
+}
+
+.menu-btn.open .line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-btn.open .line:nth-child(2) {
+    opacity: 0; 
+}
+
+.menu-btn.open .line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 768px) {
+    
+    .menu-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        height: 30px;
+        width: 30px;
+    }
+
+    .menu-btn.open .line {
+        width: 100%;
+        transition: none;
+    }
+
+    .menu-items {
+        display: none; 
+    }
+
+    .menu-btn_burger {
+        display: block;
+    }
+
+    .menu-btn_burger.open {
+        transform: rotate(90deg); 
+    }
+
+    .menu-items.open {
+        display: flex; 
+    }
+}
