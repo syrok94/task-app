@@ -7,28 +7,27 @@ const Form = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+  const token = localStorage.getItem("token");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     // add to backend logic
     e.preventDefault();
-    
+
     try {
       const response = await fetch(API_ENDPOINT, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body : JSON.stringify({name , desc})
-    });
+        body: JSON.stringify({ name, desc }),
+      });
 
-    if(!response.ok){
-      console.log("Error creating task");
-    }
-
-
-
+      if (!response.ok) {
+        console.log("Error creating task");
+      }
     } catch (error) {
-      console.log("Error creating task" , error);
+      console.log("Error creating task", error);
     }
 
     console.log(`task : ${name} - Desc : ${desc}`);
@@ -63,7 +62,9 @@ const Form = () => {
           />
         </div>
 
-        <button className="add-btn" type="submit">Add Task </button>
+        <button className="add-btn" type="submit">
+          Add Task{" "}
+        </button>
       </form>
     </div>
   );

@@ -2,53 +2,53 @@ import { useState } from "react";
 import "../login/Login.css";
 import { AUTH_ENDPOINT } from "../../constants/endpoint";
 import { useNavigate } from "react-router-dom";
+
+
 const Login = () => {
-
   const navigate = useNavigate();
-
-  const LOGIN_ENDPOINT  = `${AUTH_ENDPOINT}/login`;
+  
+  const LOGIN_ENDPOINT = `${AUTH_ENDPOINT}/login`;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const response = await fetch(LOGIN_ENDPOINT ,{
-          method:"POST",
-          headers: {
-            'Content-Type': 'application/json',
-            
+      const response = await fetch(LOGIN_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        body : JSON.stringify({email, password})
-        });
+        body: JSON.stringify({ email, password }),
+      });
 
-        if(!response.ok){
-          return response.status(404).json({"message" : "error login user"});
-        }
+      if (!response.ok) {
+        return response.status(404).json({ message: "error login user" });
+      }
 
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
+      const data = await response.json();
 
-        console.log("User Login successfully!");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("isLoggedIn" , true);
 
-        navigate("/");
-     
+      console.log("User Login successfully!");
+
+      navigate("/");
     } catch (error) {
-        console.log("Server Error");
+      console.log("Server Error");
     }
 
     setEmail("");
     setPassword("");
   };
-  
+
   return (
     <div className="login-container">
       <div className="container">
         <h2 className="register-header">Login Here </h2>
         <form className="form" onSubmit={handleSubmit}>
-
           <div className="input-box">
             <input
               type="email"
@@ -68,9 +68,9 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <button className="submit" type="submit">
-          login
+            login
           </button>
         </form>
       </div>
@@ -78,5 +78,4 @@ const Login = () => {
   );
 };
 
-
-export default Login
+export default Login;

@@ -3,10 +3,13 @@ import "../tasks/Task.css";
 import { API_ENDPOINT } from "../../constants/endpoint.js";
 import Modal from "../modal/Modal.jsx";
 
+
 const Task = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  
+  const token = localStorage.getItem('token');
 
   const fetchData = async () => {
     try {
@@ -24,16 +27,17 @@ const Task = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [tasks]);
 
   const handleDelete = async (task) => {
     const DELETE_API = `${API_ENDPOINT}/${task._id}`;
+
     try {
       const res = await fetch(DELETE_API, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…0ODd9.rKYdQ8oUNGxKQXdiKzrTH2QDRckaZJRbyl9OUBgACI8"
+          "Authorization":`Bearer ${token}`
         },
       });
 
@@ -54,10 +58,12 @@ const Task = () => {
         method: "PUT", 
         headers: {
           "Content-Type": "application/json",
-          "Authorization":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…0ODd9.rKYdQ8oUNGxKQXdiKzrTH2QDRckaZJRbyl9OUBgACI8"
+          "Authorization":`Bearer ${token}`
         },
         body: JSON.stringify(editedTask),
       });
+
+      console.log(token);
 
       if (!res.ok) {
         throw new Error("Error updating task");
