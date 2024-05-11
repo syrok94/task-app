@@ -2,7 +2,8 @@ import { useState } from "react";
 import "../Register/Register.css";
 import { AUTH_ENDPOINT } from "../../constants/endpoint";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -26,10 +27,12 @@ const Register = () => {
       if (!response.ok) {
         const errorData = await response.json(); 
         console.error("Error registering user:", errorData.message);
-      
+        toast.error("Register Again!!");
         return;
       }
-  
+      
+
+      toast.success("User Registered Successfully !!");
       console.log("User registered successfully!");
       navigate("/login");
      
@@ -84,6 +87,18 @@ const Register = () => {
           </button>
         </form>
       </div>
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

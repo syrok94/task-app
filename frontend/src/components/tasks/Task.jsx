@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import "../tasks/Task.css";
 import { API_ENDPOINT } from "../../constants/endpoint.js";
 import Modal from "../modal/Modal.jsx";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Task = () => {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  
-  const token = localStorage.getItem('token');
+
+  const token = localStorage.getItem("token");
 
   const fetchData = async () => {
     try {
@@ -37,16 +38,22 @@ const Task = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Authorization":`Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (!res.ok) {
+        toast.error("You need to login first!!");
+
         throw new Error("Error deleting task");
       }
 
       await fetchData();
+
+      toast.success("Task Deleted Successfully !!");
+      
     } catch (error) {
+      toast.error("Error Deleting Task !!");
       console.log("Error deleting task:", error);
     }
   };
@@ -55,10 +62,10 @@ const Task = () => {
     const EDIT_API = `${API_ENDPOINT}/${selectedTask._id}`;
     try {
       const res = await fetch(EDIT_API, {
-        method: "PUT", 
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Authorization":`Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(editedTask),
       });
@@ -69,8 +76,10 @@ const Task = () => {
         throw new Error("Error updating task");
       }
 
-      await fetchData(); 
+      await fetchData();
+      toast.success("Task Updated Succesfully !!");
     } catch (error) {
+      toast.error("Error Updating Task!!");
       console.log("Error updating task:", error);
     }
   };
@@ -86,6 +95,18 @@ const Task = () => {
 
   return (
     <div className="tasks-container">
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <h2 className="task-header">All Tasks</h2>
       <div className="tt-mid">
         {tasks.length > 0 &&

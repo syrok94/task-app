@@ -2,11 +2,12 @@ import { useState } from "react";
 import "../login/Login.css";
 import { AUTH_ENDPOINT } from "../../constants/endpoint";
 import { useNavigate } from "react-router-dom";
-
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const navigate = useNavigate();
   
+
   const LOGIN_ENDPOINT = `${AUTH_ENDPOINT}/login`;
 
   const [email, setEmail] = useState("");
@@ -25,6 +26,7 @@ const Login = () => {
       });
 
       if (!response.ok) {
+        toast.error("Wrong Credentials!!");
         return response.status(404).json({ message: "error login user" });
       }
 
@@ -33,6 +35,7 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("isLoggedIn" , true);
 
+      toast.success("Login successfully!");
       console.log("User Login successfully!");
 
       navigate("/");
@@ -46,6 +49,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      
       <div className="container">
         <h2 className="register-header">Login Here </h2>
         <form className="form" onSubmit={handleSubmit}>
@@ -74,6 +78,18 @@ const Login = () => {
           </button>
         </form>
       </div>
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

@@ -5,6 +5,8 @@ import "../pages/Home.css";
 
 
 const Home = () => {
+  
+
   return (
     <div>
       <Navbar />
@@ -12,6 +14,8 @@ const Home = () => {
         <Task />
         <Form />
       </div>
+      
+      
     </div>
   );
 };

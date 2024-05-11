@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "../form/Form.css";
 import { API_ENDPOINT } from "../../constants/endpoint";
-// import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Form = () => {
   // const navigate = useNavigate();
@@ -24,17 +25,21 @@ const Form = () => {
       });
 
       if (!response.ok) {
+        toast.error("You need to login first !!");
         console.log("Error creating task");
+        return;
       }
+      
     } catch (error) {
+      toast.error("Error Creating Task!!");
       console.log("Error creating task", error);
     }
 
     console.log(`task : ${name} - Desc : ${desc}`);
 
+    toast.success("Task Created Succesfully!!");
     setName("");
     setDesc("");
-
     window.location.reload();
   };
 
@@ -66,6 +71,19 @@ const Form = () => {
           Add Task{" "}
         </button>
       </form>
+
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
