@@ -48,3 +48,22 @@ input{
     background-color: #0056b3;
   }
  
+
+  @media (max-width:768px) {
+    .container {
+      width: 90%;
+      height: 50vh;
+    
+    }
+
+    .input-box{
+      margin-top: 20px;
+    }
+
+    .submit{
+      margin-top: 20px;
+    }
+    .login-container {
+      width: 100%;
+    }
+  }
