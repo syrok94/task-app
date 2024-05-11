@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import "../tasks/Task.css";
 import { API_ENDPOINT } from "../../constants/endpoint.js";
 import Modal from "../modal/Modal.jsx";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Task = () => {
   const [tasks, setTasks] = useState([]);
@@ -43,17 +41,15 @@ const Task = () => {
       });
 
       if (!res.ok) {
-        toast.error("You need to login first!!");
-
-        throw new Error("Error deleting task");
+        return;
       }
-
+      
       await fetchData();
 
-      toast.success("Task Deleted Successfully !!");
-      
+      res.send("task deleted succesfully!!");
+
     } catch (error) {
-      toast.error("Error Deleting Task !!");
+      
       console.log("Error deleting task:", error);
     }
   };
@@ -77,9 +73,8 @@ const Task = () => {
       }
 
       await fetchData();
-      toast.success("Task Updated Succesfully !!");
+      
     } catch (error) {
-      toast.error("Error Updating Task!!");
       console.log("Error updating task:", error);
     }
   };
@@ -95,18 +90,6 @@ const Task = () => {
 
   return (
     <div className="tasks-container">
-      <ToastContainer
-        position="top-left"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
       <h2 className="task-header">All Tasks</h2>
       <div className="tt-mid">
         {tasks.length > 0 &&
@@ -137,6 +120,7 @@ const Task = () => {
           handleEditTask={handleEditTask}
         />
       )}
+      
     </div>
   );
 };
