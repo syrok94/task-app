@@ -21,6 +21,10 @@ app.use(cookieParser());
 app.use("/task",taskRouter);
 app.use("/user",userRouter);
 
+app.get("/" , (req,res)=>{
+    res.send("Hello from the server");
+})
+
 app.listen(PORT , ()=>{
     console.log(`server running on port : ${PORT}...`);
 })
