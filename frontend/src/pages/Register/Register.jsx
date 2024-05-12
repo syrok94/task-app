@@ -13,35 +13,32 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch(REGISTER_ENDPOINT, {
         method: "POST",
         headers: {
-          'Content-Type':'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }), 
+        body: JSON.stringify({ name, email, password }),
       });
-  
+
       if (!response.ok) {
-        const errorData = await response.json(); 
+        const errorData = await response.json();
         console.error("Error registering user:", errorData.message);
         return;
       }
-      
+
       console.log("User registered successfully!");
       navigate("/login");
-     
     } catch (error) {
       console.error("Server Error:", error);
-
     }
-  
+
     setName("");
     setEmail("");
     setPassword("");
   };
-  
 
   return (
     <div className="register-container">
@@ -77,7 +74,7 @@ const Register = () => {
               required
             />
           </div>
-       
+
           <button className="submit" type="submit">
             SignUp
           </button>

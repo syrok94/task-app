@@ -1,12 +1,13 @@
 const asyncHandler = require("express-async-handler");
-const Task  = require("../../models/task.model");
+const Task = require("../../models/task.model");
 
 //@desc get all tasks
 //@route GET /tasks
 //@access public
 
- const getAllTasks = asyncHandler(async (req, res) => {
+const getAllTasks = asyncHandler(async (req, res) => {
   try {
+    //getting all the task in sorted order of time at which it is craeted
     const tasks = await Task.find().sort({ createdAt: -1 });
     res.status(200).json(tasks);
   } catch (err) {
@@ -19,11 +20,12 @@ const Task  = require("../../models/task.model");
 //@route POST /tasks
 //@access private
 
- const createTask = asyncHandler(async (req, res) => {
+const createTask = asyncHandler(async (req, res) => {
   try {
     console.log(req.body);
     const { name, desc } = req.body;
 
+    //check if name and description is provided
     if (!name || !desc) {
       res.status(400);
       throw new Error("All Fiels are mandatory!");
@@ -35,8 +37,8 @@ const Task  = require("../../models/task.model");
     });
 
     console.log("Task Created!!");
-
     res.status(201).json(task);
+
   } catch (err) {
     console.error("task not created!!", err);
     res.status(500).json({ message: "internal server error" });
@@ -47,12 +49,12 @@ const Task  = require("../../models/task.model");
 //@route GET /tasks/:id
 //@access public
 
- const getSingleTask = asyncHandler(async (req, res) => {
+const getSingleTask = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
     const task = await Task.findById(id);
 
-    if(!task){
+    if (!task) {
       res.status(404).json({ message: "Task not found" });
     }
     res.status(200).json(task);
@@ -66,7 +68,7 @@ const Task  = require("../../models/task.model");
 //@route PUT /tasks/:id:
 //@access private
 
- const updateTask = asyncHandler(async (req, res) => {
+const updateTask = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
     const updatedTask = await Task.findByIdAndUpdate(id, req.body, {
@@ -88,7 +90,7 @@ const Task  = require("../../models/task.model");
 //@route DELETE /tasks/:id
 //@access private
 
- const deleteTask = asyncHandler(async (req, res) => {
+const deleteTask = asyncHandler(async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id);
@@ -98,7 +100,7 @@ const Task  = require("../../models/task.model");
       return res.status(404).json({ message: "Task Not Found!!" });
     }
 
-    res.json({ message: "Task Deleted Succesfully !!" });
+    res.status(200).json({ message: "Task Deleted Succesfully !!" });
   } catch (err) {
     console.error("Error deleting data !!", err);
     res.status(500).json({ message: "Internal Server Error" });

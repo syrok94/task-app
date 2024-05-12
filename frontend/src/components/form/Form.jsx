@@ -23,13 +23,10 @@ const Form = () => {
       });
 
       if (!response.ok) {
-       
         console.log("Error creating task");
         return;
       }
-
     } catch (error) {
-      
       console.log("Error creating task", error);
     }
 
@@ -66,8 +63,6 @@ const Form = () => {
           Add Task{" "}
         </button>
       </form>
-
- 
     </div>
   );
 };

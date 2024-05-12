@@ -61,9 +61,11 @@ const Modal = ({ name, desc, handleCloseModal, handleEditTask }) => {
               ></textarea>
             </div>
 
-            <div className="edit-btn-div"><button className="btn-save-changes" type="submit">
-              Save
-            </button></div>
+            <div className="edit-btn-div">
+              <button className="btn-save-changes" type="submit">
+                Save
+              </button>
+            </div>
           </form>
         </div>
       )}

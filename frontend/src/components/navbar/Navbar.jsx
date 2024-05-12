@@ -10,16 +10,16 @@ const Navbar = () => {
 
   const [userName, setUserName] = useState("");
   const token = localStorage.getItem("token");
-  
+
   const navigate = useNavigate();
 
   const fetchCurrentUser = async () => {
     try {
-      const response = await fetch(`${AUTH_ENDPOINT}/current`,{
-        method:"GET",
+      const response = await fetch(`${AUTH_ENDPOINT}/current`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization":`Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -29,10 +29,9 @@ const Navbar = () => {
         console.log("No user name present");
       }
 
-        console.log(currentUser);
+      console.log(currentUser);
 
       setUserName(currentUser.username);
-
     } catch (error) {
       console.log("unable to fech current user!!");
     }
@@ -47,9 +46,9 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-     localStorage.clear();
-      navigate("/");
-      window.location.reload();
+    localStorage.clear();
+    navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -75,9 +74,11 @@ const Navbar = () => {
           </Link>
         )}
 
-        {isLoggedIn && <div className="profile">
-          <p>Hello🖐,{userName}</p>
-        </div>}
+        {isLoggedIn && (
+          <div className="profile">
+            <p>Hello🖐,{userName}</p>
+          </div>
+        )}
 
         {isLoggedIn && (
           <Link to="/">

@@ -9,7 +9,8 @@ const authenticateToken = asyncHandler(async (req, res, next) => {
   if (authHeader && authHeader.startsWith("Bearer")) {
     token = authHeader.split(" ")[1];
   }
-  console.log("token: ", token);
+
+  // console.log("token: ", token);
 
   if (!token) {
     return res.status(401).json({ error: "Unauthorized: Token missing" });
@@ -21,7 +22,7 @@ const authenticateToken = asyncHandler(async (req, res, next) => {
     }
     req.user = User;
 
-    console.log("user :" ,User);
+    // console.log("user :" ,User);
 
     next();
   });

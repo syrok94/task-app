@@ -3,6 +3,7 @@ const User = require("../../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
+
 //@desc get user
 //@route GET /user
 //@access public
@@ -29,7 +30,7 @@ const LoginUser = asyncHandler(async (req, res) => {
     }
 
     const expTime = 1000 * 60 * 60 * 60 * 24;
-
+    // create a JWT token on the basis of user's data
     const token = jwt.sign(
       { userId: user._id, username: user.name, email: user.email },
       JWT_SECRET,
@@ -63,6 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
       res.status(401).send("A user Already exist with this email !!");
     }
 
+    //hashed the password before saving it to the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
@@ -80,7 +82,12 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc current user
+//@route GET /current
+//@access private
+
 const currentUser = asyncHandler(async (req, res) => {
+  // logic to get the current user
   res.json(req.user);
 });
 

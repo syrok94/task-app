@@ -43,13 +43,11 @@ const Task = () => {
       if (!res.ok) {
         return;
       }
-      
+
       await fetchData();
 
       res.send("task deleted succesfully!!");
-
     } catch (error) {
-      
       console.log("Error deleting task:", error);
     }
   };
@@ -73,7 +71,6 @@ const Task = () => {
       }
 
       await fetchData();
-      
     } catch (error) {
       console.log("Error updating task:", error);
     }
@@ -120,7 +117,6 @@ const Task = () => {
           handleEditTask={handleEditTask}
         />
       )}
-      
     </div>
   );
 };

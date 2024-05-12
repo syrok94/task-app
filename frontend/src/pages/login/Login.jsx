@@ -32,7 +32,6 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("isLoggedIn", true);
 
-     
       console.log("User Login successfully!");
 
       navigate("/");
