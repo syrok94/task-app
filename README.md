@@ -3,6 +3,7 @@ Task Management App
 
 # Table of Contents
 - Installation
+- Project setup 
 - API Documentation
 
 # installation command
@@ -10,7 +11,10 @@ Task Management App
   > **npm install**
 - To run the project.<be>
   > **npm start**
-
+# Project setup
+- You need to add a .env file
+- .env contains PORT, Mongo_uri,JWT_SECRET
+  
 # API Documentation
 ## Base URL :  http://localhost/5000
 
