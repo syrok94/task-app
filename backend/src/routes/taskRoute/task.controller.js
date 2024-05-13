@@ -1,11 +1,13 @@
 const asyncHandler = require("express-async-handler");
 const Task = require("../../models/task.model");
+const User = require("../../models/user.model");
 
 //@desc get all tasks
 //@route GET /tasks
 //@access public
 
 const getAllTasks = asyncHandler(async (req, res) => {
+
   try {
     //getting all the task in sorted order of time at which it is craeted
     const tasks = await Task.find().sort({ createdAt: -1 });

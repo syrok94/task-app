@@ -64,7 +64,7 @@ const Task = () => {
         body: JSON.stringify(editedTask),
       });
 
-      console.log(token);
+      // console.log(token);
 
       if (!res.ok) {
         throw new Error("Error updating task");
