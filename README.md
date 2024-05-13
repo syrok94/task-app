@@ -12,8 +12,8 @@ Task Management App
 - To run the project.<be>
   > **npm start**
 # Project setup
-- You need to add a .env file
-- .env contains PORT, Mongo_uri,JWT_SECRET
+- You need to add a .env file in the backend 
+- .env contains PORT, URI ,JWT_SECRET
   
 # API Documentation
 ## Base URL :  http://localhost/5000
