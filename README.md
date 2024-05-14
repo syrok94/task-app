@@ -13,7 +13,7 @@ Task Management App
   > **npm start**
 # Project setup
 - You need to add a .env file in the backend 
-- .env contains PORT, URI ,JWT_SECRET
+- .env contains PORT = 5000 , URI , JWT_SECRET
   
 # API Documentation
 ## Base URL :  http://localhost/5000
